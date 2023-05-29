@@ -1,5 +1,5 @@
-@extends('user.layouts.app')
-<H1>outaside</H1>
+@extends('layouts.app')
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
