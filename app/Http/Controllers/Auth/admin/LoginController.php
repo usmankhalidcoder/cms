@@ -194,9 +194,7 @@ class LoginController extends Controller
             return $response;
         }
 
-        return $request->wantsJson()
-            ? new JsonResponse([], 204)
-            : redirect('/');
+        return  redirect('/admin/adminlogin');
     }
 
     /**
@@ -225,7 +223,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo ='admin/home';
+    protected $redirectTo ='admin/adminhome';
 
     /**
      * Create a new controller instance.

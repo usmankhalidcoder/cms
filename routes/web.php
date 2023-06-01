@@ -26,7 +26,7 @@ Auth::routes();
 
 Route::get('/home' ,[UserController::class , 'index' ])->name('home');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::prefix('admin')->group(function (){
+Route::prefix('admin')->namespace('admin')->group(function (){
     Route::get('adminregister', [RegisterController::class,'showRegistrationForm'])->name('adminregister');
     Route::post('adminregister', [RegisterController::class ,'register']);
     Route::get('adminlogin', [LoginController::class ,'showLoginForm'])->name('adminlogin');
@@ -34,3 +34,5 @@ Route::prefix('admin')->group(function (){
     Route::get('adminhome' ,[adminController::class , 'index' ])->name('adminhome');
 
 });
+Route::post('adminlogout', [LoginController::class ,'logout'])->name('adminlogout');
+
