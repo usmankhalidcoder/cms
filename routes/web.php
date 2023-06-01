@@ -5,7 +5,8 @@ use App\Http\Controllers\Auth\user\UserController ;
 use App\Http\Controllers\Auth\admin\adminController ;
 use App\Http\Controllers\Auth\admin\LoginController ;
 use App\Http\Controllers\Auth\admin\RegisterController ;
-
+use App\Models\User ;
+use App\Models\Role ;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('query', function (){
+    // dd(User::all());
+    $user = User::find(52);
+    $res = $user->role->role;
+    dd($res);
+});
 
 Route::get('/home' ,[UserController::class , 'index' ])->name('home');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

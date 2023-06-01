@@ -7,7 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-
+use App\Models\User ;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +51,12 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $this->validateLogin($request);
+
+        $user = User::where('email' , $request->email)->first();
+        if($user->role->role == 'user')
+        {
+            return redirect()->back()->with('This IS invalidd login  ');
+        }
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
