@@ -5,6 +5,8 @@ use App\Http\Controllers\Auth\user\UserController ;
 use App\Http\Controllers\Auth\admin\adminController ;
 use App\Http\Controllers\Auth\admin\LoginController ;
 use App\Http\Controllers\Auth\admin\RegisterController ;
+use App\Http\Controllers\Auth\admin\ResetPasswordController ;
+use App\Http\Controllers\Auth\admin\ForgotPasswordController;
 use App\Models\User ;
 use App\Models\Role ;
 
@@ -39,6 +41,12 @@ Route::prefix('admin')->namespace('admin')->group(function (){
     Route::get('adminlogin', [LoginController::class ,'showLoginForm'])->name('adminlogin');
     Route::post('adminlogin', [LoginController::class,'login']);
     Route::get('adminhome' ,[adminController::class , 'index' ])->name('adminhome');
+
+    Route::get('password/reset', [ForgotPasswordController::class , 'showLinkRequestForm'])->name('password.request');
+    Route::post('password/email', [ForgotPasswordController:: class ,'sendResetLinkEmail'])->name('password.email');
+    Route::get('password/reset/{token}', [ResetPasswordController :: class ,'showResetForm'])->name('password.reset');
+    Route::post('password/reset', [ResetPasswordController :: class , 'reset'])->name('password.update');
+
 
 });
 Route::post('adminlogout', [LoginController::class ,'logout'])->name('adminlogout');

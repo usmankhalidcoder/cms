@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -51,5 +52,17 @@ class User extends Authenticatable
     {
         // dd('ahaha');
         return $this->hasOne(Role::class ,'id' , 'role_id');
+    }
+        /**
+     * Send a password reset notification to the user.
+     *
+     * @param  string  $token
+     */
+    public function sendPasswordResetNotification($token): void
+    {
+       $role = $this->role->role == 'admin' ? 'admin.password.reset' : 'password.reset';
+        $pay_role = $role ;
+        // dd($pay_role);
+        $this->notify(new ResetPasswordNotification( $pay_role ,   $token ));
     }
 }
