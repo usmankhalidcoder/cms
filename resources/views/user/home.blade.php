@@ -1,5 +1,5 @@
 @extends('user.layouts.app')
-
+@extends('user.auth.sidebar')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

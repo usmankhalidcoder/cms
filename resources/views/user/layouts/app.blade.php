@@ -38,7 +38,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @if(Auth::id())
+                        <li> <a class="nav-link" href="{{ route('edit') }}">{{ __('update') }}</a></li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -79,7 +81,7 @@
                 </div>
             </div>
         </nav>
-
+        @yield('index-sidebar')
         <main class="py-4">
             @yield('content')
         </main>

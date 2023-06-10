@@ -34,6 +34,13 @@ Route::get('query', function (){
 });
 
 Route::get('/home' ,[UserController::class , 'index' ])->name('home');
+Route::get('/edit' ,[UserController::class , 'edit' ])->name('edit');
+Route::post('/updateprofile' ,[UserController::class , 'update' ])->name('updateprofile');
+Route::get('password/reset', 'Auth\user\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\user\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\user\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\user\ResetPasswordController@reset')->name('password.update');
+
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::prefix('admin')->namespace('admin')->group(function (){
     Route::get('adminregister', [RegisterController::class,'showRegistrationForm'])->name('adminregister');
